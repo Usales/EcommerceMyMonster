@@ -28,7 +28,7 @@ const SlideItem = ({ image, title, description, buttonColor, buttonText, price, 
     <img src={image} alt={title} className="absolute inset-0 w-full h-full object-cover bg-black" />
     <div className={`absolute inset-0 bg-gradient-to-r from-${buttonColor}-600/30 to-${buttonColor}-800/30`}>
       {/* Preço e Estrelas - Posicionado na lateral direita */}
-      <div className="absolute top-1/2 right-4 md:right-8 lg:right-16 transform -translate-y-1/2 text-white flex flex-col items-end z-10">
+      <div className="absolute top-8 md:top-12 lg:top-16 right-4 md:right-8 lg:right-16 text-white flex flex-col items-end z-10">
         <span className="text-xl md:text-2xl lg:text-3xl font-bold uppercase mb-2">{bitcoinPrice}</span>
         <div className="flex gap-2">
           {[...Array(5)].map((_, i) => (
