@@ -1,6 +1,7 @@
 # MyDrugs E-commerce
 
 Aplicação web de e-commerce especializada em produtos farmacêuticos, com interface moderna e sistema de pagamento em Bitcoin.
+Inspirado em "how to sell drugs online (fast)", em português seria "como vender drogas online (rápido)", o site foi feito com fins de estudo e pratica, objetivo dos projetos é me fornecer experiência e me garantir um emprego na área.
 
 ## 🔥 Funcionalidades
 
