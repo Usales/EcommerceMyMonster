@@ -1,5 +1,6 @@
 import { useState } from 'react'
-import logo from '../Imagens/mydrugslogocontorno.png'
+import { motion } from 'framer-motion'
+import logo from '../Imagens/mydrugslogo.png'
 import Slider from 'react-slick'
 import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"
@@ -24,28 +25,87 @@ import mdmapeach from '../Imagens/mdmapeach.jpg'
 import mdmaazul from '../Imagens/mdmaazul.jpg'
 
 const SlideItem = ({ image, title, description, buttonColor, buttonText, price, bitcoinPrice }) => (
-  <div className="relative h-[500px] md:h-[600px] lg:h-[800px]">
-    <img src={image} alt={title} className="absolute inset-0 w-full h-full object-cover bg-black" />
+  <div className="relative h-screen">
+    <img src={image} alt={title} className="absolute inset-0 w-full h-full object-cover" />
     <div className={`absolute inset-0 bg-gradient-to-r from-${buttonColor}-600/30 to-${buttonColor}-800/30`}>
       {/* Preço e Estrelas - Posicionado na lateral direita */}
-      <div className="absolute top-8 md:top-12 lg:top-16 right-4 md:right-8 lg:right-16 text-white flex flex-col items-end z-10">
-        <span className="text-xl md:text-2xl lg:text-3xl font-bold uppercase mb-2">{bitcoinPrice}</span>
-        <div className="flex gap-2">
+      <div className="absolute top-[60%] sm:top-1/2 -translate-y-1/2 right-4 md:right-8 lg:right-16 text-white flex flex-col items-end z-10">
+        <motion.span 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1.5 }}
+          className="text-2xl sm:text-3xl md:text-5xl lg:text-7xl font-bold uppercase mb-2 sm:mb-4"
+        >
+          {bitcoinPrice}
+        </motion.span>
+        <div className="flex gap-2 sm:gap-3 md:gap-4">
           {[...Array(5)].map((_, i) => (
-            <svg key={i} className="w-6 h-6 md:w-8 md:h-8 lg:w-10 lg:h-10 text-yellow-400" viewBox="0 0 24 24" fill="currentColor">
+            <motion.svg 
+              key={i}
+              initial={{ opacity: 0, scale: 0 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{
+                duration: 0.5,
+                delay: i * 0.1
+              }}
+              className="w-8 h-8 sm:w-10 sm:h-10 md:w-16 md:h-16 lg:w-24 lg:h-24 text-white"
+              viewBox="0 0 24 24" 
+              fill="currentColor"
+            >
               <path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/>
-            </svg>
+            </motion.svg>
           ))}
         </div>
       </div>
+      <style jsx>{`
+        @keyframes wave {
+          0%, 100% {
+            transform: scale(1) translateY(0);
+          }
+          25% {
+            transform: scale(1.2) translateY(-15px);
+          }
+          50% {
+            transform: scale(1) translateY(0);
+          }
+        }
+      `}</style>
       <div className="h-full flex items-center px-4 md:px-8 lg:px-16">
         <div className="text-white max-w-2xl">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-2 md:mb-4">{title}</h2>
-          <p className="text-sm md:text-base lg:text-xl mb-4 md:mb-6 lg:mb-8">{description}</p>
-          <span className={`text-xl md:text-2xl font-bold text-${buttonColor}-400 mb-2 md:mb-4 block`}>{price}</span>
-          <button className={`bg-${buttonColor}-500 text-white px-4 py-2 md:px-6 md:py-3 lg:px-8 lg:py-4 rounded-lg font-semibold text-base md:text-lg hover:bg-${buttonColor}-400 transition-colors mt-4 md:mt-6 lg:mt-8`}>
+          <motion.h2 
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="text-3xl md:text-4xl lg:text-5xl font-bold mb-2 md:mb-4"
+          >
+            {title}
+          </motion.h2>
+          <motion.p 
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+            className="text-sm md:text-base lg:text-xl mb-4 md:mb-6 lg:mb-8"
+          >
+            {description}
+          </motion.p>
+          <motion.span 
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, delay: 0.6 }}
+            className={`text-xl md:text-2xl font-bold text-${buttonColor}-400 mb-2 md:mb-4 block`}
+          >
+            {price}
+          </motion.span>
+          <motion.button 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            transition={{ duration: 0.5, delay: 0.8 }}
+            className={`bg-${buttonColor}-500 text-white px-4 py-2 md:px-6 md:py-3 lg:px-8 lg:py-4 rounded-lg font-semibold text-base md:text-lg hover:bg-${buttonColor}-400 transition-colors mt-4 md:mt-6 lg:mt-8`}
+          >
             {buttonText}
-          </button>
+          </motion.button>
         </div>
       </div>
     </div>
@@ -76,7 +136,7 @@ function TelaInicial() {
       buttonColor: "yellow",
       buttonText: "Saiba Mais",
       price: "R$ 99,90",
-      bitcoinPrice: "BTC 0.0017"
+      bitcoinPrice: "BTC 0.0001656"
     },
     {
       image: stableGenius,
@@ -85,7 +145,7 @@ function TelaInicial() {
       buttonColor: "blue",
       buttonText: "Explorar",
       price: "R$ 149,90",
-      bitcoinPrice: "BTC 0.036"
+      bitcoinPrice: "BTC 0.0002484"
     },
     {
       image: redPill,
@@ -94,7 +154,7 @@ function TelaInicial() {
       buttonColor: "red",
       buttonText: "Descobrir",
       price: "R$ 199,90",
-      bitcoinPrice: "BTC 0.0036"
+      bitcoinPrice: "BTC 0.0003313"
     },
     {
       image: purplePill,
@@ -103,7 +163,7 @@ function TelaInicial() {
       buttonColor: "purple",
       buttonText: "Experimentar",
       price: "R$ 179,90",
-      bitcoinPrice: "BTC 0.0012"
+      bitcoinPrice: "BTC 0.0002979"
     },
     {
       image: pinkpill,
@@ -112,7 +172,7 @@ function TelaInicial() {
       buttonColor: "pink",
       buttonText: "Conhecer",
       price: "R$ 189,90",
-      bitcoinPrice: "BTC 0.0021"
+      bitcoinPrice: "BTC 0.0003146"
     },
     {
       image: greenPill,
@@ -121,7 +181,7 @@ function TelaInicial() {
       buttonColor: "green",
       buttonText: "Explorar",
       price: "R$ 169,90",
-      bitcoinPrice: "BTC 0.0029"
+      bitcoinPrice: "BTC 0.0002814"
     },
     {
       image: peachPill,
@@ -130,7 +190,7 @@ function TelaInicial() {
       buttonColor: "green",
       buttonText: "Explorar",
       price: "R$ 159,90",
-      bitcoinPrice: "BTC 0.0041"
+      bitcoinPrice: "BTC 0.0002649"
     }
   ]
 
@@ -206,25 +266,59 @@ function TelaInicial() {
     <div className="min-h-screen bg-black overflow-x-hidden">
 
       {/* Header/Navbar */}
-      <header className="bg-black">
-        <div className="flex flex-col items-center py-2 md:py-4">
+      <header className="absolute top-0 left-0 right-0 z-50">
+        <div className="container mx-auto px-4">
+          <div className="flex flex-col md:flex-row items-center justify-between py-4 md:py-6">
+            {/* Links da Esquerda */}
+            <nav className="flex items-center gap-2 sm:gap-4 md:gap-6 lg:gap-10 mb-4 md:mb-0">
+              {["Home", "Shop", "FAQ"].map((item, index) => (
+                <motion.a
+                  key={item}
+                  href="#"
+                  initial={{ opacity: 0, y: -20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  whileHover={{ scale: 1.1 }}
+                  className="text-white hover:text-gray-300 text-xs sm:text-sm md:text-base lg:text-lg font-bold transition-all duration-150 border border-white px-2 sm:px-3 py-1"
+                >
+                  {item}
+                </motion.a>
+              ))}
+            </nav>
 
-          {/* Logo */}
-          <div className="mb-2 md:mb-4">
-            <img src={logo} alt="MyDrugs Logo" className="h-16 md:h-20 lg:h-24" />
+            {/* Logo Central */}
+            <motion.div 
+              className="flex-shrink-0 mb-4 md:mb-0"
+              initial={{ opacity: 0, scale: 0.5 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+              whileHover={{ scale: 1.05 }}
+            >
+              <img src={logo} alt="MyDrugs Logo" className="h-12 sm:h-16 md:h-20 lg:h-24" />
+            </motion.div>
+
+            {/* Links da Direita */}
+            <nav className="flex items-center gap-2 sm:gap-3 md:gap-4">
+              {["Segurança", "Login", "Cadastrar"].map((item, index) => (
+                <motion.a
+                  key={item}
+                  href="#"
+                  initial={{ opacity: 0, y: -20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 + 0.4 }}
+                  whileHover={{ scale: 1.1 }}
+                  className="text-white hover:text-gray-300 text-xs sm:text-sm md:text-base lg:text-lg font-bold transition-all duration-150 border border-white px-2 sm:px-3 py-1"
+                >
+                  {item}
+                </motion.a>
+              ))}
+            </nav>
           </div>
-
-          {/* Navigation Links */}
-          <nav className="flex items-center gap-4 md:gap-6 lg:gap-10">
-            <a href="#" className="text-white hover:text-gray-300 text-sm md:text-base lg:text-lg font-bold transition-all duration-300">Home</a>
-            <a href="#" className="text-white hover:text-gray-300 text-sm md:text-base lg:text-lg font-bold transition-all duration-300">Produtos</a>
-            <a href="#" className="text-white hover:text-gray-300 text-sm md:text-base lg:text-lg font-bold transition-all duration-300">Carrinho</a>
-          </nav>
         </div>
       </header>
 
       {/* Slider */}
-      <div className="w-[95%] md:w-[90%] mx-auto max-w-none overflow-hidden">
+      <div className="w-full h-[calc(100vh-4rem)] sm:h-screen">
         <Slider {...sliderSettings}>
           {slides.map((slide, index) => (
             <SlideItem key={index} {...slide} />
@@ -233,50 +327,84 @@ function TelaInicial() {
       </div>
 
       {/* Products Grid */}
-      <main className="container py-6 md:py-8 lg:py-12 pt-16 md:pt-24 lg:pt-32">
-        <h2 className="text-2xl md:text-3xl font-bold mb-4 md:mb-6 lg:mb-8 text-white">Produtos em Destaque</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8">
+      <main className="container mx-auto px-4 py-6 md:py-8 lg:py-12 pt-16 md:pt-24 lg:pt-32 bg-black">
+        <motion.h2 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="text-xl sm:text-2xl md:text-3xl font-bold mb-4 md:mb-6 lg:mb-8 text-white"
+        >
+          Produtos em Destaque
+        </motion.h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-6 md:gap-8 lg:gap-10">
           {products
             .filter(product => product.description.includes('MDMA'))
             .map((product, index) => (
-              <div key={index} className="relative group">
-                <div className="h-[300px] md:h-[350px] lg:h-[400px] bg-gray-900 rounded-lg overflow-hidden">
-                  <img src={product.image} alt={product.name} className="w-full h-full object-cover" />
+              <motion.div 
+                key={index} 
+                className="relative group"
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ 
+                  duration: 0.5,
+                  delay: index * 0.1,
+                  ease: "easeOut"
+                }}
+                whileHover={{ scale: 1.02 }}
+              >
+                <div className="h-[250px] sm:h-[300px] md:h-[350px] lg:h-[400px] bg-gray-900 rounded-lg overflow-hidden">
+                  <motion.img 
+                    src={product.image} 
+                    alt={product.name} 
+                    className="w-full h-full object-cover"
+                    whileHover={{ scale: 1.1 }}
+                    transition={{ duration: 0.3 }}
+                  />
                   <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-70 transition-all duration-300 flex items-center justify-center">
-                    <div className="text-white opacity-0 group-hover:opacity-100 transition-all duration-300 text-center p-4">
-                      <h3 className="text-lg md:text-xl font-bold mb-2">{product.name}</h3>
-                      <p className="text-xs md:text-sm mb-2 md:mb-4">{product.description}</p>
-                      <span className={`text-xl md:text-2xl font-bold text-${product.buttonColor}-400 mb-2 md:mb-4 block`}>{product.price}</span>
-                      <button className={`bg-${product.buttonColor}-500 text-white px-4 py-1 md:px-6 md:py-2 rounded-lg font-bold text-sm md:text-base hover:bg-${product.buttonColor}-400 transition-colors`}>
+                    <div className="text-white opacity-0 group-hover:opacity-100 transition-all duration-300 text-center p-2 sm:p-4">
+                      <h3 className="text-base sm:text-lg md:text-xl font-bold mb-1 sm:mb-2">
+                        {product.name}
+                      </h3>
+                      <p className="text-xs md:text-sm mb-1 sm:mb-2 md:mb-4">
+                        {product.description}
+                      </p>
+                      <span className={`text-lg sm:text-xl md:text-2xl font-bold text-${product.buttonColor}-400 mb-1 sm:mb-2 md:mb-4 block`}>
+                        {product.price}
+                      </span>
+                      <button 
+                        className={`bg-${product.buttonColor}-500 text-white px-3 sm:px-4 py-1 md:px-6 md:py-2 rounded-lg font-bold text-xs sm:text-sm md:text-base hover:bg-${product.buttonColor}-400 transition-colors`}
+                      >
                         {product.buttonText}
                       </button>
                     </div>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             ))}
         </div>
       </main>
 
       {/* Footer */}
       <footer className="bg-black text-white py-4 md:py-6 lg:py-8 border-t border-gray-800">
-        <div className="container">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 lg:gap-8">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 lg:gap-8">
             <div>
-              <h3 className="text-lg md:text-xl font-bold mb-2 md:mb-4">MyDrugs</h3>
-              <p className="text-sm md:text-base text-gray-400">Sua loja online de confiança</p>
+              <h3 className="text-base sm:text-lg md:text-xl font-bold mb-2 md:mb-4">MyDrugs</h3>
+              <p className="text-xs sm:text-sm md:text-base text-gray-400">Sua loja online de confiança</p>
             </div>
             <div>
-              <h4 className="text-base md:text-lg font-semibold mb-2 md:mb-4">Links Úteis</h4>
+              <h4 className="text-sm sm:text-base md:text-lg font-semibold mb-2 md:mb-4">Links Úteis</h4>
               <ul className="space-y-1 md:space-y-2">
-                <li><a href="#" className="text-gray-400 hover:text-white">Sobre Nós</a></li>
-                <li><a href="#" className="text-gray-400 hover:text-white">Contato</a></li>
-                <li><a href="#" className="text-gray-400 hover:text-white">Política de Privacidade</a></li>
+                <li><a href="#" className="text-xs sm:text-sm md:text-base text-gray-400 hover:text-white">Sobre Nós</a></li>
+                <li><a href="#" className="text-xs sm:text-sm md:text-base text-gray-400 hover:text-white">Contato</a></li>
+                <li><a href="#" className="text-xs sm:text-sm md:text-base text-gray-400 hover:text-white">Política de Privacidade</a></li>
               </ul>
             </div>
             <div>
-              <h4 className="text-base md:text-lg font-semibold mb-2 md:mb-4">Contato</h4>
-              <ul className="space-y-1 md:space-y-2 text-gray-400 text-sm md:text-base">
+              <h4 className="text-sm sm:text-base md:text-lg font-semibold mb-2 md:mb-4">Contato</h4>
+              <ul className="space-y-1 md:space-y-2 text-gray-400 text-xs sm:text-sm md:text-base">
                 <li>Email: contato@mydrugs.com</li>
                 <li>Telefone: (11) 9999-9999</li>
                 <li>Endereço: Rua Exemplo, 123</li>
