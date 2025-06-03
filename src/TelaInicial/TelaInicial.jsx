@@ -4,6 +4,7 @@ import logo from '../Imagens/mydrugslogo.png'
 import Slider from 'react-slick'
 import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"
+import { Link } from 'react-router-dom'
 
 // Importando as imagens das pílulas
 import yellowPill from '../Imagens/yellowpill.png'
@@ -43,10 +44,16 @@ const SlideItem = ({ image, title, description, buttonColor, buttonText, price, 
             <motion.svg 
               key={i}
               initial={{ opacity: 0, scale: 0 }}
-              animate={{ opacity: 1, scale: 1 }}
+              animate={{ 
+                opacity: 1, 
+                scale: 1,
+                y: [0, -15, 0]
+              }}
               transition={{
-                duration: 0.5,
-                delay: i * 0.1
+                duration: 2.5,
+                repeat: Infinity,
+                delay: i * 0.3,
+                ease: "easeInOut"
               }}
               className="w-8 h-8 sm:w-10 sm:h-10 md:w-16 md:h-16 lg:w-24 lg:h-24 text-white"
               viewBox="0 0 24 24" 
@@ -272,17 +279,20 @@ function TelaInicial() {
             {/* Links da Esquerda */}
             <nav className="flex items-center gap-2 sm:gap-4 md:gap-6 lg:gap-10 mb-4 md:mb-0">
               {["Home", "Shop", "FAQ"].map((item, index) => (
-                <motion.a
+                <motion.div
                   key={item}
-                  href="#"
                   initial={{ opacity: 0, y: -20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                   whileHover={{ scale: 1.1 }}
-                  className="text-white hover:text-gray-300 text-xs sm:text-sm md:text-base lg:text-lg font-bold transition-all duration-150 border border-white px-2 sm:px-3 py-1"
                 >
-                  {item}
-                </motion.a>
+                  <Link
+                    to={item === "Home" ? "/" : `/${item.toLowerCase()}`}
+                    className="text-white hover:text-gray-300 text-xs sm:text-sm md:text-base lg:text-lg font-bold transition-all duration-150 border border-white px-2 sm:px-3 py-1"
+                  >
+                    {item}
+                  </Link>
+                </motion.div>
               ))}
             </nav>
 
@@ -294,23 +304,28 @@ function TelaInicial() {
               transition={{ duration: 0.5, delay: 0.3 }}
               whileHover={{ scale: 1.05 }}
             >
-              <img src={logo} alt="MyDrugs Logo" className="h-12 sm:h-16 md:h-20 lg:h-24" />
+              <Link to="/">
+                <img src={logo} alt="MyDrugs Logo" className="h-12 sm:h-16 md:h-20 lg:h-24" />
+              </Link>
             </motion.div>
 
             {/* Links da Direita */}
             <nav className="flex items-center gap-2 sm:gap-3 md:gap-4">
-              {["Segurança", "Login", "Cadastrar"].map((item, index) => (
-                <motion.a
+              {["Seguranca", "Login", "Cadastrar"].map((item, index) => (
+                <motion.div
                   key={item}
-                  href="#"
                   initial={{ opacity: 0, y: -20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.1 + 0.4 }}
                   whileHover={{ scale: 1.1 }}
-                  className="text-white hover:text-gray-300 text-xs sm:text-sm md:text-base lg:text-lg font-bold transition-all duration-150 border border-white px-2 sm:px-3 py-1"
                 >
-                  {item}
-                </motion.a>
+                  <Link
+                    to={item === "Seguranca" ? "/seguranca" : `/${item.toLowerCase()}`}
+                    className="text-white hover:text-gray-300 text-xs sm:text-sm md:text-base lg:text-lg font-bold transition-all duration-150 border border-white px-2 sm:px-3 py-1"
+                  >
+                    {item}
+                  </Link>
+                </motion.div>
               ))}
             </nav>
           </div>
