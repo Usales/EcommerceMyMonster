@@ -1,6 +1,7 @@
 # MyDrugs E-commerce
 
 Um e-commerce moderno e responsivo para venda de produtos, desenvolvido com React e Tailwind CSS.
+Projeto desenvolvido com o objetivo de praticar minhas habilidades de programação. Ele foi inspirado na série "Como Vender Drogas Online (Rápido)" exibida pela Netflix. Declaro que este projeto nunca teve como finalidade o tráfico ou comércio de entorpecentes. As fotos e imagens contidas neste site foram criadas e obtidas da internet.
 
 ## 🚀 Tecnologias Utilizadas
 
