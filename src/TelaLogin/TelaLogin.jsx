@@ -28,7 +28,7 @@ function TelaLogin() {
       {/* Header/Navbar */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-sm">
         <div className="container mx-auto px-4">
-          <div className="flex flex-col md:flex-row items-center justify-between py-4">
+          <div className="flex flex-col md:flex-row items-center justify-between py-2 md:py-4">
             {/* Links da Esquerda */}
             <nav className="flex items-center gap-2 sm:gap-4 md:gap-6 lg:gap-10 mb-4 md:mb-0">
               {["Home", "Shop", "FAQ"].map((item, index) => (
@@ -86,7 +86,7 @@ function TelaLogin() {
       </header>
 
       {/* Conteúdo Login */}
-      <main className="container mx-auto px-4 pt-32 pb-16">
+      <main className="container mx-auto px-4 pt-40 md:pt-48 pb-16">
         <div className="max-w-md mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}

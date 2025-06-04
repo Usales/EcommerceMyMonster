@@ -407,22 +407,19 @@ function TelaInicial() {
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 lg:gap-8">
             <div>
               <h3 className="text-base sm:text-lg md:text-xl font-bold mb-2 md:mb-4">MyDrugs</h3>
-              <p className="text-xs sm:text-sm md:text-base text-gray-400">Sua loja online de confiança</p>
+              <p className="text-xs sm:text-sm md:text-base text-gray-400">Projeto desenvolvido com o objetivo de praticar minhas habilidades de programação. Ele foi inspirado na série "Como Vender Drogas Online (Rápido)" exibida pela Netflix. Declaro que este projeto nunca teve como finalidade o tráfico ou comércio de entorpecentes. As fotos e imagens contidas neste site foram criadas e obtidas da internet.</p>
             </div>
             <div>
               <h4 className="text-sm sm:text-base md:text-lg font-semibold mb-2 md:mb-4">Links Úteis</h4>
               <ul className="space-y-1 md:space-y-2">
-                <li><a href="#" className="text-xs sm:text-sm md:text-base text-gray-400 hover:text-white">Sobre Nós</a></li>
-                <li><a href="#" className="text-xs sm:text-sm md:text-base text-gray-400 hover:text-white">Contato</a></li>
-                <li><a href="#" className="text-xs sm:text-sm md:text-base text-gray-400 hover:text-white">Política de Privacidade</a></li>
+                <li><a href="https://www.linkedin.com/in/gabriel-henriques-sales-43953b218/" className="text-xs sm:text-sm md:text-base text-gray-400 hover:text-white">Linkedin</a></li>
               </ul>
             </div>
             <div>
               <h4 className="text-sm sm:text-base md:text-lg font-semibold mb-2 md:mb-4">Contato</h4>
               <ul className="space-y-1 md:space-y-2 text-gray-400 text-xs sm:text-sm md:text-base">
-                <li>Email: contato@mydrugs.com</li>
-                <li>Telefone: (11) 9999-9999</li>
-                <li>Endereço: Rua Exemplo, 123</li>
+                <li>Email: GabrielHenriqueslsales1@gmail.com</li>
+                <li>Whatsapp: (62) 99522-7774</li>
               </ul>
             </div>
           </div>
