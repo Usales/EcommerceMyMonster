@@ -4,7 +4,7 @@ import logo from '../Imagens/mydrugslogo.png'
 import Slider from 'react-slick'
 import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 // Importando as imagens das pílulas
 import yellowPill from '../Imagens/yellowpill.png'
@@ -25,42 +25,27 @@ import mdmaverde from '../Imagens/mdmaverde.jpg'
 import mdmapeach from '../Imagens/mdmapeach.jpg'
 import mdmaazul from '../Imagens/mdmaazul.jpg'
 
-const SlideItem = ({ image, title, description, buttonColor, buttonText, price, bitcoinPrice }) => (
+const SlideItem = ({ image, title, description, buttonColor, buttonText, price, bitcoinPrice, onButtonClick }) => (
   <div className="relative h-screen">
     <img src={image} alt={title} className="absolute inset-0 w-full h-full object-cover" />
     <div className={`absolute inset-0 bg-gradient-to-r from-${buttonColor}-600/30 to-${buttonColor}-800/30`}>
       {/* Preço e Estrelas - Posicionado na lateral direita */}
       <div className="absolute top-[60%] sm:top-1/2 -translate-y-1/2 right-4 md:right-8 lg:right-16 text-white flex flex-col items-end z-10">
-        <motion.span 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.5 }}
+        <span 
           className="text-2xl sm:text-3xl md:text-5xl lg:text-7xl font-bold uppercase mb-2 sm:mb-4"
         >
           {bitcoinPrice}
-        </motion.span>
+        </span>
         <div className="flex gap-2 sm:gap-3 md:gap-4">
           {[...Array(5)].map((_, i) => (
-            <motion.svg 
+            <svg 
               key={i}
-              initial={{ opacity: 0, scale: 0 }}
-              animate={{ 
-                opacity: 1, 
-                scale: 1,
-                y: [0, -15, 0]
-              }}
-              transition={{
-                duration: 2.5,
-                repeat: Infinity,
-                delay: i * 0.3,
-                ease: "easeInOut"
-              }}
               className="w-8 h-8 sm:w-10 sm:h-10 md:w-16 md:h-16 lg:w-24 lg:h-24 text-white"
               viewBox="0 0 24 24" 
               fill="currentColor"
             >
               <path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/>
-            </motion.svg>
+            </svg>
           ))}
         </div>
       </div>
@@ -79,40 +64,27 @@ const SlideItem = ({ image, title, description, buttonColor, buttonText, price, 
       `}</style>
       <div className="h-full flex items-center px-4 md:px-8 lg:px-16">
         <div className="text-white max-w-2xl">
-          <motion.h2 
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
+          <h2 
             className="text-3xl md:text-4xl lg:text-5xl font-bold mb-2 md:mb-4"
           >
             {title}
-          </motion.h2>
-          <motion.p 
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
+          </h2>
+          <p 
             className="text-sm md:text-base lg:text-xl mb-4 md:mb-6 lg:mb-8"
           >
             {description}
-          </motion.p>
-          <motion.span 
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5, delay: 0.6 }}
+          </p>
+          <span 
             className={`text-xl md:text-2xl font-bold text-${buttonColor}-400 mb-2 md:mb-4 block`}
           >
             {price}
-          </motion.span>
-          <motion.button 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            transition={{ duration: 0.5, delay: 0.8 }}
+          </span>
+          <button 
             className={`bg-${buttonColor}-500 text-white px-4 py-2 md:px-6 md:py-3 lg:px-8 lg:py-4 rounded-lg font-semibold text-base md:text-lg hover:bg-${buttonColor}-400 transition-colors mt-4 md:mt-6 lg:mt-8`}
+            onClick={onButtonClick}
           >
             {buttonText}
-          </motion.button>
+          </button>
         </div>
       </div>
     </div>
@@ -120,6 +92,7 @@ const SlideItem = ({ image, title, description, buttonColor, buttonText, price, 
 )
 
 function TelaInicial() {
+  const navigate = useNavigate()
   const sliderSettings = {
     dots: true,
     infinite: true,
@@ -273,59 +246,41 @@ function TelaInicial() {
     <div className="min-h-screen bg-black overflow-x-hidden">
 
       {/* Header/Navbar */}
-      <header className="absolute top-0 left-0 right-0 z-50">
+      <header className="absolute top-0 left-0 right-0 z-50 slide-down-fade">
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row items-center justify-between py-4 md:py-6">
             {/* Links da Esquerda */}
             <nav className="flex items-center gap-2 sm:gap-4 md:gap-6 lg:gap-10 mb-4 md:mb-0">
-              {["Home", "Shop", "FAQ"].map((item, index) => (
-                <motion.div
-                  key={item}
-                  initial={{ opacity: 0, y: -20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  whileHover={{ scale: 1.1 }}
-                >
+              {["Home", "Shop", "FAQ"].map((item) => (
+                <div key={item}>
                   <Link
                     to={item === "Home" ? "/" : `/${item.toLowerCase()}`}
-                    className="text-white hover:text-gray-300 text-xs sm:text-sm md:text-base lg:text-lg font-bold transition-all duration-150 border border-white px-2 sm:px-3 py-1"
+                    className="transition-transform duration-300 hover:scale-105 text-white hover:text-gray-300 text-xs sm:text-sm md:text-base lg:text-lg font-bold border border-white px-2 sm:px-3 py-1"
                   >
                     {item}
                   </Link>
-                </motion.div>
+                </div>
               ))}
             </nav>
 
             {/* Logo Central */}
-            <motion.div 
-              className="flex-shrink-0 mb-4 md:mb-0"
-              initial={{ opacity: 0, scale: 0.5 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: 0.3 }}
-              whileHover={{ scale: 1.05 }}
-            >
+            <div className="flex-shrink-0 mb-4 md:mb-0">
               <Link to="/">
-                <img src={logo} alt="MyDrugs Logo" className="h-12 sm:h-16 md:h-20 lg:h-24" />
+                <img src={logo} alt="MyDrugs Logo" className="h-12 sm:h-16 md:h-20 lg:h-24 logo-header" />
               </Link>
-            </motion.div>
+            </div>
 
             {/* Links da Direita */}
             <nav className="flex items-center gap-2 sm:gap-3 md:gap-4">
-              {["Seguranca", "Login", "Cadastrar"].map((item, index) => (
-                <motion.div
-                  key={item}
-                  initial={{ opacity: 0, y: -20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 + 0.4 }}
-                  whileHover={{ scale: 1.1 }}
-                >
+              {["Seguranca", "Login", "Cadastrar"].map((item) => (
+                <div key={item}>
                   <Link
                     to={item === "Seguranca" ? "/seguranca" : `/${item.toLowerCase()}`}
-                    className="text-white hover:text-gray-300 text-xs sm:text-sm md:text-base lg:text-lg font-bold transition-all duration-150 border border-white px-2 sm:px-3 py-1"
+                    className="transition-transform duration-300 hover:scale-105 text-white hover:text-gray-300 text-xs sm:text-sm md:text-base lg:text-lg font-bold border border-white px-2 sm:px-3 py-1"
                   >
                     {item}
                   </Link>
-                </motion.div>
+                </div>
               ))}
             </nav>
           </div>
@@ -336,46 +291,31 @@ function TelaInicial() {
       <div className="w-full h-[calc(100vh-4rem)] sm:h-screen">
         <Slider {...sliderSettings}>
           {slides.map((slide, index) => (
-            <SlideItem key={index} {...slide} />
+            <SlideItem key={index} {...slide} onButtonClick={() => navigate('/shop')} />
           ))}
         </Slider>
       </div>
 
       {/* Products Grid */}
       <main className="container mx-auto px-4 py-6 md:py-8 lg:py-12 pt-16 md:pt-24 lg:pt-32 bg-black">
-        <motion.h2 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
+        <h2 
           className="text-xl sm:text-2xl md:text-3xl font-bold mb-4 md:mb-6 lg:mb-8 text-white"
         >
           Produtos em Destaque
-        </motion.h2>
+        </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-6 md:gap-8 lg:gap-10">
           {products
             .filter(product => product.description.includes('MDMA'))
             .map((product, index) => (
-              <motion.div 
+              <div 
                 key={index} 
                 className="relative group"
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ 
-                  duration: 0.5,
-                  delay: index * 0.1,
-                  ease: "easeOut"
-                }}
-                whileHover={{ scale: 1.02 }}
               >
                 <div className="h-[250px] sm:h-[300px] md:h-[350px] lg:h-[400px] bg-gray-900 rounded-lg overflow-hidden">
-                  <motion.img 
+                  <img 
                     src={product.image} 
                     alt={product.name} 
                     className="w-full h-full object-cover"
-                    whileHover={{ scale: 1.1 }}
-                    transition={{ duration: 0.3 }}
                   />
                   <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-70 transition-all duration-300 flex items-center justify-center">
                     <div className="text-white opacity-0 group-hover:opacity-100 transition-all duration-300 text-center p-2 sm:p-4">
@@ -390,13 +330,14 @@ function TelaInicial() {
                       </span>
                       <button 
                         className={`bg-${product.buttonColor}-500 text-white px-3 sm:px-4 py-1 md:px-6 md:py-2 rounded-lg font-bold text-xs sm:text-sm md:text-base hover:bg-${product.buttonColor}-400 transition-colors`}
+                        onClick={() => navigate('/shop')}
                       >
                         {product.buttonText}
                       </button>
                     </div>
                   </div>
                 </div>
-              </motion.div>
+              </div>
             ))}
         </div>
       </main>
@@ -407,12 +348,15 @@ function TelaInicial() {
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 lg:gap-8">
             <div>
               <h3 className="text-base sm:text-lg md:text-xl font-bold mb-2 md:mb-4">MyDrugs</h3>
-              <p className="text-xs sm:text-sm md:text-base text-gray-400">Projeto desenvolvido com o objetivo de praticar minhas habilidades de programação. Ele foi inspirado na série "Como Vender Drogas Online (Rápido)" exibida pela Netflix. Declaro que este projeto nunca teve como finalidade o tráfico ou comércio de entorpecentes. As fotos e imagens contidas neste site foram criadas e obtidas da internet.</p>
+              <p className="text-xs sm:text-sm md:text-base text-gray-400">Projeto desenvolvido com o objetivo de praticar minhas habilidades de programação. Ele foi inspirado na série "Como Vender Drogas Online (Rápido)" lançada em 2021 e exibida pela Netflix. Declaro que este projeto nunca teve como finalidade o tráfico ou comércio de entorpecentes. As fotos e imagens contidas neste site foram criadas e obtidas da internet.</p>
             </div>
             <div>
               <h4 className="text-sm sm:text-base md:text-lg font-semibold mb-2 md:mb-4">Links Úteis</h4>
               <ul className="space-y-1 md:space-y-2">
+              <li><a href="https://salesportifolio.netlify.app/" className="text-xs sm:text-sm md:text-base text-gray-400 hover:text-white">Portifolio</a></li>
+              <li><a href="https://github.com/Usales" className="text-xs sm:text-sm md:text-base text-gray-400 hover:text-white">Github</a></li>
                 <li><a href="https://www.linkedin.com/in/gabriel-henriques-sales-43953b218/" className="text-xs sm:text-sm md:text-base text-gray-400 hover:text-white">Linkedin</a></li>
+                <li><a href="https://www.behance.net/gallery/133806169/How-To-Sell-Drugs-Online-(Netflix-Series)?tracking_source=search_projects|how+to+sell+drugs+online&l=17" className="text-xs sm:text-sm md:text-base text-gray-400 hover:text-white">Imagens | Produtos</a></li>
               </ul>
             </div>
             <div>

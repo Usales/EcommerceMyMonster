@@ -12,4 +12,24 @@
   .container {
     @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
   }
+}
+
+@keyframes slideDownFade {
+  0% {
+    opacity: 0;
+    transform: translateY(-40px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.slide-down-fade {
+  animation: slideDownFade 1.2s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.logo-header:hover, button:hover, header button:hover {
+  transform: scale(1.04);
+  transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1);
 } 

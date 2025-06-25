@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import logo from '../Imagens/mydrugslogo.png'
 
@@ -26,59 +25,41 @@ function TelaLogin() {
   return (
     <div className="min-h-screen bg-black text-white">
       {/* Header/Navbar */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-sm">
+      <header className="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-sm slide-down-fade">
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row items-center justify-between py-2 md:py-4">
             {/* Links da Esquerda */}
             <nav className="flex items-center gap-2 sm:gap-4 md:gap-6 lg:gap-10 mb-4 md:mb-0">
-              {["Home", "Shop", "FAQ"].map((item, index) => (
-                <motion.div
-                  key={item}
-                  initial={{ opacity: 0, y: -20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  whileHover={{ scale: 1.1 }}
-                >
+              {["Home", "Shop", "FAQ"].map((item) => (
+                <div key={item}>
                   <Link
                     to={item === "Home" ? "/" : `/${item.toLowerCase()}`}
-                    className="text-white hover:text-gray-300 text-xs sm:text-sm md:text-base lg:text-lg font-bold transition-all duration-150 border border-white px-2 sm:px-3 py-1"
+                    className="transition-transform duration-300 hover:scale-105 text-white hover:text-gray-300 text-xs sm:text-sm md:text-base lg:text-lg font-bold border border-white px-2 sm:px-3 py-1"
                   >
                     {item}
                   </Link>
-                </motion.div>
+                </div>
               ))}
             </nav>
 
             {/* Logo Central */}
-            <motion.div 
-              className="flex-shrink-0 mb-4 md:mb-0"
-              initial={{ opacity: 0, scale: 0.5 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: 0.3 }}
-              whileHover={{ scale: 1.05 }}
-            >
+            <div className="flex-shrink-0 mb-4 md:mb-0">
               <Link to="/">
-                <img src={logo} alt="MyDrugs Logo" className="h-12 sm:h-16 md:h-20 lg:h-24" />
+                <img src={logo} alt="MyDrugs Logo" className="h-12 sm:h-16 md:h-20 lg:h-24 logo-header" />
               </Link>
-            </motion.div>
+            </div>
 
             {/* Links da Direita */}
             <nav className="flex items-center gap-2 sm:gap-3 md:gap-4">
-              {["Seguranca", "Login", "Cadastrar"].map((item, index) => (
-                <motion.div
-                  key={item}
-                  initial={{ opacity: 0, y: -20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 + 0.4 }}
-                  whileHover={{ scale: 1.1 }}
-                >
+              {["Seguranca", "Login", "Cadastrar"].map((item) => (
+                <div key={item}>
                   <Link
                     to={item === "Seguranca" ? "/seguranca" : `/${item.toLowerCase()}`}
-                    className="text-white hover:text-gray-300 text-xs sm:text-sm md:text-base lg:text-lg font-bold transition-all duration-150 border border-white px-2 sm:px-3 py-1"
+                    className="transition-transform duration-300 hover:scale-105 text-white hover:text-gray-300 text-xs sm:text-sm md:text-base lg:text-lg font-bold border border-white px-2 sm:px-3 py-1"
                   >
                     {item}
                   </Link>
-                </motion.div>
+                </div>
               ))}
             </nav>
           </div>
@@ -86,11 +67,9 @@ function TelaLogin() {
       </header>
 
       {/* Conteúdo Login */}
-      <main className="container mx-auto px-4 pt-40 md:pt-48 pb-16">
-        <div className="max-w-md mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
+      <main className="container mx-auto px-4 pt-[210px] pb-16">
+        <div className="max-w-md mx-auto slide-down-fade">
+          <div
             className="bg-gray-800/50 backdrop-blur-md p-6 sm:p-8 rounded-lg border border-white"
           >
             <h1 className="text-2xl sm:text-3xl font-bold text-center mb-6 text-white/90">Login</h1>
@@ -128,14 +107,12 @@ function TelaLogin() {
                 />
               </div>
 
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+              <button
                 className="w-full bg-transparent border border-white text-white px-4 py-2 sm:py-3 text-sm sm:text-base rounded-none transition-all duration-150 hover:bg-white/10"
                 type="submit"
               >
                 Entrar
-              </motion.button>
+              </button>
             </form>
 
             <div className="mt-6 text-center">
@@ -146,7 +123,7 @@ function TelaLogin() {
                 </Link>
               </p>
             </div>
-          </motion.div>
+          </div>
         </div>
       </main>
     </div>
