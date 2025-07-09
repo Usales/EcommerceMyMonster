@@ -1,4 +1,4 @@
-# MyDrugs E-commerce
+# MyMonster E-commerce
 
 Um e-commerce moderno e responsivo para venda de produtos, desenvolvido com React e Tailwind CSS.
 Projeto desenvolvido com o objetivo de praticar minhas habilidades de programação. Ele foi inspirado na série "Como Vender Drogas Online (Rápido)" exibida pela Netflix. Declaro que este projeto nunca teve como finalidade o tráfico ou comércio de entorpecentes. As fotos e imagens contidas neste site foram criadas e obtidas da internet.
@@ -40,12 +40,12 @@ Projeto desenvolvido com o objetivo de praticar minhas habilidades de programaç
 
 1. Clone o repositório:
 ```bash
-git clone https://github.com/seu-usuario/ecommercemydrugs.git
+git clone https://github.com/seu-usuario/ecommercemymonster.git
 ```
 
 2. Instale as dependências:
 ```bash
-cd ecommercemydrugs
+cd ecommercemymonster
 npm install
 ```
 
