@@ -5,28 +5,28 @@ import logo from '../Imagens/mydrugslogo.png'
 function TelaSeguranca() {
   const segurancaItems = [
     {
-      titulo: "Criptografia de Ponta a Ponta",
-      conteudo: "Todas as comunicações são criptografadas de ponta a ponta, garantindo que apenas você e o destinatário possam ler as mensagens."
+      titulo: "Proteção de Dados Pessoais",
+      conteudo: "Seus dados pessoais são protegidos e utilizados apenas para processar seu pedido. Não compartilhamos informações com terceiros sem sua autorização."
     },
     {
-      titulo: "Pagamento em Bitcoin",
-      conteudo: "Utilizamos exclusivamente Bitcoin como forma de pagamento, garantindo total anonimato nas transações."
+      titulo: "Pagamento Seguro",
+      conteudo: "Todas as transações são realizadas em ambiente seguro, com criptografia SSL. Aceitamos cartão de crédito, débito e Pix."
     },
     {
-      titulo: "Entrega Discreta",
-      conteudo: "Nossas embalagens são neutras e discretas, sem qualquer identificação do conteúdo."
+      titulo: "Entrega Rápida e Rastreamento",
+      conteudo: "Seu pedido é enviado rapidamente e você recebe um código para rastrear a entrega em tempo real."
     },
     {
-      titulo: "Proteção de Dados",
-      conteudo: "Seus dados pessoais são protegidos e nunca compartilhados com terceiros."
+      titulo: "Produtos Originais e Lacrados",
+      conteudo: "Trabalhamos apenas com energéticos Monster originais, lacrados e dentro do prazo de validade."
     },
     {
-      titulo: "Comunicação Segura",
-      conteudo: "Utilizamos canais de comunicação seguros e criptografados para todas as interações."
+      titulo: "Suporte ao Cliente",
+      conteudo: "Nossa equipe está disponível para tirar dúvidas e resolver qualquer problema relacionado ao seu pedido."
     },
     {
-      titulo: "Anonimato Garantido",
-      conteudo: "Sua identidade é protegida em todas as etapas do processo, desde o cadastro até a entrega."
+      titulo: "Consumo Responsável",
+      conteudo: "Energéticos devem ser consumidos com moderação. Não recomendamos para menores de 18 anos, gestantes ou pessoas sensíveis à cafeína."
     }
   ]
 

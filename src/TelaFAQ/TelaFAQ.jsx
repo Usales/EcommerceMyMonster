@@ -6,27 +6,35 @@ function TelaFAQ() {
   const faqItems = [
     {
       pergunta: "Como faço para comprar?",
-      resposta: "Para realizar uma compra, você precisa criar uma conta, fazer login e escolher os produtos desejados. O pagamento é feito exclusivamente em Bitcoin."
+      resposta: "Basta criar uma conta, fazer login, escolher seus energéticos favoritos e finalizar a compra pelo site."
     },
     {
       pergunta: "Quais são as formas de pagamento?",
-      resposta: "Aceitamos apenas Bitcoin como forma de pagamento, garantindo total anonimato e segurança nas transações."
+      resposta: "Aceitamos pagamentos em reais (R$) via cartão de crédito, débito e Pix."
+    },
+    {
+      pergunta: "Quais sabores estão disponíveis?",
+      resposta: "Temos uma linha completa Monster Ultra: Limão cítrico, Mirtilo, Frutos vermelhos, Framboesa azul, Rosá (frutos vermelhos/florais), Paradise (kiwi/lima/pepino) e Sunrise (laranja cítrica)."
+    },
+    {
+      pergunta: "Qual a quantidade de cafeína por lata?",
+      resposta: "Nossos energéticos variam entre 140mg e 155mg de cafeína por lata de 473ml. Veja a descrição de cada produto para detalhes."
     },
     {
       pergunta: "Como é feita a entrega?",
-      resposta: "Utilizamos um sistema de entrega discreto e seguro. O produto é enviado em embalagem neutra, sem identificação do conteúdo."
+      resposta: "A entrega é feita pelos Correios ou transportadora, com rastreamento e prazo médio de 2 a 7 dias úteis para todo o Brasil."
     },
     {
-      pergunta: "É seguro comprar?",
-      resposta: "Sim, utilizamos criptografia de ponta a ponta, pagamentos em Bitcoin e embalagens discretas para garantir sua segurança."
+      pergunta: "Os produtos são originais?",
+      resposta: "Sim! Trabalhamos apenas com energéticos Monster originais, lacrados e dentro do prazo de validade."
     },
     {
-      pergunta: "Como rastrear meu pedido?",
-      resposta: "Após a confirmação do pagamento, você receberá um código de rastreamento anônimo para acompanhar sua entrega."
+      pergunta: "Posso consumir se pratico esportes?",
+      resposta: "Sim, mas sempre consulte um profissional de saúde. Nossos energéticos são ideais para dar energia antes de treinos ou para manter o foco nos estudos."
     },
     {
       pergunta: "Qual a política de reembolso?",
-      resposta: "Oferecemos reembolso em caso de problemas com a entrega ou qualidade do produto. Entre em contato com nosso suporte."
+      resposta: "Oferecemos reembolso em caso de problemas com a entrega ou qualidade do produto. Entre em contato com nosso suporte para mais informações."
     }
   ]
 

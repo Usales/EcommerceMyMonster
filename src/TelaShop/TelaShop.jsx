@@ -26,67 +26,59 @@ function TelaShop() {
   const produtos = [
     {
       id: 1,
-      nome: "Esctasy Amarela",
-      descricao: "125MG MDMA - Sabor Limão",
-      preco: "0.0025 BTC",
+      nome: "🍋Ultra Citron",
+      descricao: "Cafeína: ~140mg | Sabor: Limão cítrico vibrante.",
+      preco: "R$ 34,90",
       imagem: pensandomdma,
       cor: "yellow"
     },
     {
       id: 2,
-      nome: "Racha Cuca",
-      descricao: "130MG MDMA - Sabor Mirtilo",
-      preco: "0.0018 BTC",
+      nome: "🔋 Monster Rehab",
+      descricao: "Cafeína: ~140mg | Sabor: Mirtilo.",
+      preco: "R$ 34,90",
       imagem: mdmagenie,
       cor: "blue"
     },
     {
       id: 3,
-      nome: "Esctasy Vermelho",
-      descricao: "100MG MDMA",
-      preco: "0.0022 BTC",
+      nome: "🐉Ultra Red",
+      descricao: "Cafeína: 140mg | Sabor: Frutos vermelhos (fruit punch).",
+      preco: "R$ 34,90",
       imagem: mdmavermelho,
       cor: "red"
     },
     {
       id: 4,
-      nome: "Esctasy Roxa",
-      descricao: "70MG MDMA",
-      preco: "0.0030 BTC",
+      nome: "🌊 Ultra Blue",
+      descricao: "Cafeína: 140mg | Sabor: Framboesa azul com toques cítricos.",
+      preco: "R$ 34,90",
       imagem: mdmaroxo,
       cor: "purple"
     },
     {
       id: 5,
-      nome: "Esctasy do Diabinho",
-      descricao: "130MG MDMA - Sabor Framboesa",
-      preco: "0.0028 BTC",
+      nome: "🌸 Ultra Rosá",
+      descricao: "Cafeína: 150mg | Sabor: Frutos vermelhos com notas florais / limonada rosa.",
+      preco: "R$ 34,90",
       imagem: mdmadiabo,
       cor: "pink"
     },
     {
       id: 6,
-      nome: "Esctasy Verde",
-      descricao: "60MG MDMA",
-      preco: "0.0026 BTC",
+      nome: "🌴 Ultra Paradise",
+      descricao: "Cafeína: 140mg | Sabor: Kiwi, lima e toque de pepino — sabor tropical.",
+      preco: "R$ 34,90",
       imagem: mdmaverde,
       cor: "green"
     },
     {
       id: 7,
-      nome: "Esctasy Natural",
-      descricao: "130MG MDMA - Sabor Maçã",
-      preco: "0.0027 BTC",
+      nome: "🌅 Ultra Sunrise",
+      descricao: "Cafeína: 155mg | Sabor: Laranja cítrica (tipo tangerina/toranja).",
+      preco: "R$ 34,90",
       imagem: mdmapeach,
       cor: "orange"
-    },
-    {
-      id: 8,
-      nome: "Trevo de 4 folhas",
-      descricao: "130MG MDMA - Sabor Algodão doce",
-      preco: "0.0029 BTC",
-      imagem: mdmaazul,
-      cor: "blue"
     }
   ]
 
@@ -115,10 +107,11 @@ function TelaShop() {
   }
 
   const calcularPrecoTotal = () => {
-    if (!produtoSelecionado) return "0 BTC"
-    const precoBase = parseFloat(produtoSelecionado.preco.replace(" BTC", ""))
-    const precoTotal = (precoBase * quantidade).toFixed(4)
-    return `${precoTotal} BTC`
+    if (!produtoSelecionado) return "R$ 0,00"
+    // Extrai apenas o número do preço em reais
+    const precoBase = parseFloat(produtoSelecionado.preco.replace('R$', '').replace(',', '.').trim())
+    const precoTotal = (precoBase * quantidade).toFixed(2).replace('.', ',')
+    return `R$ ${precoTotal}`
   }
 
   const adicionarAoCarrinho = () => {

@@ -1,21 +1,21 @@
 import { useState } from 'react'
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import logo from '../Imagens/mydrugslogo.png'
 import Slider from 'react-slick'
 import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"
 import { Link, useNavigate } from 'react-router-dom'
 
-// Importando as imagens das pílulas
-import yellowPill from '../Imagens/yellowpill.png'
-import stableGenius from '../Imagens/stablegenius.png'
-import redPill from '../Imagens/redpill.png'
-import purplePill from '../Imagens/purplepill.png'
-import pinkpill from '../Imagens/pinkpill.png'
-import greenPill from '../Imagens/greenpill.png'
-import peachPill from '../Imagens/peachpill.png'
+// Importando as imagens
+import yellowbackground from '../Imagens/yellowpill.png'
+import darkpinkbackground from '../Imagens/stablegenius.png'
+import redbackground from '../Imagens/redpill.jpg'
+import purpebackground from '../Imagens/purplepill.png'
+import pinkbackground from '../Imagens/pinkpill.png'
+import greenbackground from '../Imagens/greenpill.png'
+import peachbackground from '../Imagens/peachpill.png'
 
-//foto MDMA
+//foto Monsters
 import pensandomdma from '../Imagens/pensandomdma.png'
 import mdmagenie from '../Imagens/mdmagenie.jpg'
 import mdmavermelho from '../Imagens/mdmavermelho.jpg'
@@ -25,6 +25,25 @@ import mdmaverde from '../Imagens/mdmaverde.jpg'
 import mdmapeach from '../Imagens/mdmapeach.jpg'
 import mdmaazul from '../Imagens/mdmaazul.jpg'
 
+// Imagens para a imagem central
+import kindpng1 from '../Imagens/kindpng_1759252.png'
+import kindpng2 from '../Imagens/kindpng_2903045.png'
+import kindpng3 from '../Imagens/kindpng_6466813.png'
+import kindpng4 from '../Imagens/kindpng_1019503.png'
+import kindpng5 from '../Imagens/kindpng_rosa.png'
+import kindpng6 from '../Imagens/kindpng_4795949.png'
+import kindpng7 from '../Imagens/kindpng_7847141.png'
+
+const centralImages = [
+  kindpng1,
+  kindpng2,
+  kindpng3,
+  kindpng4,
+  kindpng5,
+  kindpng6,
+  kindpng7
+]
+
 const SlideItem = ({ image, title, description, buttonColor, buttonText, price, bitcoinPrice, onButtonClick }) => (
   <div className="relative h-screen">
     <img src={image} alt={title} className="absolute inset-0 w-full h-full object-cover" />
@@ -32,22 +51,11 @@ const SlideItem = ({ image, title, description, buttonColor, buttonText, price, 
       {/* Preço e Estrelas - Posicionado na lateral direita */}
       <div className="absolute top-[60%] sm:top-1/2 -translate-y-1/2 right-4 md:right-8 lg:right-16 text-white flex flex-col items-end z-10">
         <span 
-          className="text-2xl sm:text-3xl md:text-5xl lg:text-7xl font-bold uppercase mb-2 sm:mb-4"
+          className="text-2xl sm:text-3xl md:text-5xl lg:text-7xl font-bold uppercase mb-2 sm:mb-4 break-words max-w-[620px] text-right"
         >
           {bitcoinPrice}
         </span>
-        <div className="flex gap-2 sm:gap-3 md:gap-4">
-          {[...Array(5)].map((_, i) => (
-            <svg 
-              key={i}
-              className="w-8 h-8 sm:w-10 sm:h-10 md:w-16 md:h-16 lg:w-24 lg:h-24 text-white"
-              viewBox="0 0 24 24" 
-              fill="currentColor"
-            >
-              <path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/>
-            </svg>
-          ))}
-        </div>
+        {/* Removido bloco das estrelas */}
       </div>
       <style jsx>{`
         @keyframes wave {
@@ -91,8 +99,29 @@ const SlideItem = ({ image, title, description, buttonColor, buttonText, price, 
   </div>
 )
 
+const variants = {
+  enter: (direction) => ({
+    x: direction > 0 ? 300 : -300, // entra do lado oposto ao movimento
+    opacity: 0,
+    position: 'absolute'
+  }),
+  center: {
+    x: 0,
+    opacity: 1,
+    position: 'absolute'
+  },
+  exit: (direction) => ({
+    x: direction > 0 ? -300 : 300, // sai para o lado do movimento
+    opacity: 0,
+    position: 'absolute'
+  })
+}
+
 function TelaInicial() {
   const navigate = useNavigate()
+  const [currentSlide, setCurrentSlide] = useState(0)
+  const [prevSlide, setPrevSlide] = useState(0)
+  const [direction, setDirection] = useState(1)
   const sliderSettings = {
     dots: true,
     infinite: true,
@@ -106,136 +135,133 @@ function TelaInicial() {
     touchMove: true,
     draggable: true,
     swipeToSlide: true,
+    beforeChange: (oldIndex, newIndex) => {
+      setDirection(newIndex > oldIndex || (oldIndex === centralImages.length - 1 && newIndex === 0) ? 1 : -1)
+      setPrevSlide(currentSlide)
+      setCurrentSlide(newIndex)
+    },
   }
 
   const slides = [
     {
-      image: yellowPill,
-      title: "Esctasy Amarela",
-      description: "JÁ SE PERGUNTOU POR QUE O ECSTASY SE PARECE COM DOCE, MAS NUNCA É SABORIZADO? PROVE O ECSTASY COM SABOR DE LIMÃO CÍTRICO EM SUA BOCA. CADA PÍLULA CONTÉM 125MG DE MDMA E ALGUNS AROMATIZANTES NATURAIS. DISPONÍVEL POR TEMPO LIMITADO APENAS PARA NOSSOS MEMBROS PREMIUM",
+      image: yellowbackground,
+      title: "🍋Ultra Citron",
+      description: "Monster Ultra Citron é uma bebida energética sem açúcar, com baixo teor calórico, enfatizada por um sabor cítrico fresco e vibrante – uma abordagem única dentro da linha Monster Ultra, destacada pela sua lata amarela texturada.",
       buttonColor: "yellow",
       buttonText: "Saiba Mais",
-      price: "R$ 99,90",
-      bitcoinPrice: "BTC 0.0001656"
+      price: "R$ 34,90",
+      bitcoinPrice: "Explosão de energia!"
     },
     {
-      image: stableGenius,
-      title: "Racha Cuca",
-      description: "UMA BÊNÇÃO COM SABOR DE MIRTILO, CADA PÍLULA CONTÉM 130MG DE MDMA E ALGUNS AROMATIZANTES NATURAIS.",
+      image: darkpinkbackground,
+      title: "🔋 Monster Rehab",
+      description: "Monster Rehab é uma bebida nutritiva e refrescante, concebida para quem procura hidratação e revitalização de forma suave, sem gás. Ideal para recuperar energias após o desporto, uma noite difícil ou simplesmente para um boost ao longo do dia.",
       buttonColor: "blue",
       buttonText: "Explorar",
-      price: "R$ 149,90",
-      bitcoinPrice: "BTC 0.0002484"
+      price: "R$ 34,90",
+      bitcoinPrice: "Recupere sua vibe!"
     },
     {
-      image: redPill,
-      title: "Esctasy Vermelha",
-      description: "VOCÊ QUER FESTEJAR A NOITE TODA E TAMBÉM NO DIA SEGUINTE? CONFIRA A PÍLULA VERMELHA, NOSSO PRODUTO MAIS VENDIDO E COM MELHOR AVALIAÇÃO. SOMOS OS ÚNICOS REVENDEDORES DESTA PÍLULA PREMIUM, ENTÃO NÃO PERCA ESTA OPORTUNIDADE. CONTÉM 100 MG DE MDMA POR PÍLULA.",
+      image: redbackground,
+      title: "🐉Ultra Red",
+      description: "Monster Ultra Red é um energético da linha Ultra Zero‑Sugar da Monster, com um sabor a mistura de frutos vermelhos (fruit punch), leve, crocante e refrescante. Com apenas 10 calorias por lata (500 ml) e zero açúcar, oferece o máximo sabor sem comprometer a dieta .",
       buttonColor: "red",
       buttonText: "Descobrir",
-      price: "R$ 199,90",
-      bitcoinPrice: "BTC 0.0003313"
+      price: "R$ 34,90",
+      bitcoinPrice: "Energia para virar a noite!"
     },
     {
-      image: purplePill,
-      title: "Esctasy Roxa",
-      description: "A FLOR ROXA É NOSSA RECOMENDAÇÃO PRINCIPAL PARA UMA NOITE CHEIA DE FELICIDADE FOFINHA COM SUA DOSE OTIMIZADA PARA SEIS HORAS DE ÊXTASE PERFEITO. A EXPERIÊNCIA CONTÉM 70MG DE MDMA POR PÍLULA.",
+      image: purpebackground,
+      title: "🌊 Ultra Blue",
+      description: "Monster Ultra Blue é um energético da linha Zero Sugar da Monster, com sabor a framboesa azul gelada (e notas cítricas), leve, refrescante e sem açúcar. Ideal para quem procura energia intensa sem calorias.",
       buttonColor: "purple",
       buttonText: "Experimentar",
-      price: "R$ 179,90",
-      bitcoinPrice: "BTC 0.0002979"
+      price: "R$ 34,90",
+      bitcoinPrice: "Sinta a vibe gelada!"
     },
     {
-      image: pinkpill,
-      title: "Esctasy Diabinho",
-      description: "CONHEÇA A MAIS NOVA EDIÇÃO DA NOSSA LINHA DE PÍLULAS EXCLUSIVAS DO NOSSO PARCEIRO GOODTIMES. DESFRUTE DE UMA BÊNÇÃO COM SABOR DE FRAMBOESA, CADA PÍLULA CONTÉM 130MG DE MDMA E ALGUNS AROMATIZANTES NATURAIS. DISPONÍVEL A PARTIR DO PRÓXIMO MÊS",
+      image: pinkbackground,
+      title: "🌸 Ultra Rosá",
+      description: "Monster Ultra Rosá é um energético da linha Zero Sugar da Monster, com um sabor equilibrado entre frutos vermelhos e notas florais. Zero açúcar e cerca de 10 kcal por lata (500 ml), oferece energia leve e sofisticada – com 150 mg de cafeína por dose.",
       buttonColor: "pink",
       buttonText: "Conhecer",
-      price: "R$ 189,90",
-      bitcoinPrice: "BTC 0.0003146"
+      price: "R$ 34,90",
+      bitcoinPrice: "Energia com estilo!"
     },
     {
-      image: greenPill,
-      title: "Esctasy Verde",
-      description: "A PÍLULA VERDE É NOSSA RECOMENDAÇÃO PRINCIPAL PARA UMA NOITE CHEIA DE FELICIDADE FOFINHA, COM SUA DOSE OTIMIZADA PARA CERCA DE SEIS HORAS DE ÊXTASE PERFEITO. A EXPERIÊNCIA CONTÉM 60MG DE MDMA POR PÍLULA.",
+      image: greenbackground,
+      title: "🌴 Ultra Paradise",
+      description: "Monster Ultra Paradise é um energético da linha Ultra Zero Sugar, com sabor a kiwi, lima e um toque sutil de pepino, evocando um verdadeiro ambiente paradisíaco. Tem zero açúcar e apenas 10 kcal por lata de 500 ml, sendo uma escolha energética sofisticada e tropical.",
       buttonColor: "green",
       buttonText: "Explorar",
-      price: "R$ 169,90",
-      bitcoinPrice: "BTC 0.0002814"
+      price: "R$ 34,90",
+      bitcoinPrice: "Sabor do paraíso!"
     },
     {
-      image: peachPill,
-      title: "Esctasy Natural",
-      description: "UMA BÊNÇÃO COM SABOR DE MAÇã, CADA PÍLULA CONTÉM 130MG DE MDMA E ALGUNS AROMATIZANTES NATURAIS.",
+      image: peachbackground,
+      title: "🌅 Ultra Sunrise",
+      description: "Monster Ultra Sunrise pertence à série Ultra Zero Sugar da Monster, com sabor a laranja cítrica (próxima do tangerino ou sumar lemon), refrescante, leve e sem açúcar. Ideal para consumo a qualquer hora, especialmente de manhã — mantenha-se energizado com estilo e elegância.",
       buttonColor: "green",
       buttonText: "Explorar",
-      price: "R$ 159,90",
-      bitcoinPrice: "BTC 0.0002649"
+      price: "R$ 34,90",
+      bitcoinPrice: "Acorde com disposição!"
     }
   ]
 
   const products = [
     {
       image: pensandomdma,
-      name: "Esctasy Amarela",
-      description: "125MG MDMA - Sabor Limão",
-      price: "R$ 99,90",
+      name: "🍋Ultra Citron",
+      description: "Cafeína: ~140mg | Sabor: Limão cítrico vibrante.",
+      price: "R$ 34,90",
       buttonColor: "yellow",
       buttonText: "Comprar"
     },
     {
       image: mdmagenie,
-      name: "Racha Cuca",
-      description: "130MG MDMA - Sabor Mirtilo",
-      price: "R$ 149,90",
+      name: "🔋 Monster Rehab",
+      description: "Cafeína: ~140mg | Sabor: Mirtilo.",
+      price: "R$ 34,90",
       buttonColor: "blue",
       buttonText: "Comprar"
     },
     {
       image: mdmavermelho,
-      name: "Esctasy Vermelho",
-      description: "100MG MDMA",
-      price: "R$ 199,90",
+      name: "🐉Ultra Red",
+      description: "Cafeína: 140mg | Sabor: Frutos vermelhos (fruit punch).",
+      price: "R$ 34,90",
       buttonColor: "red",
       buttonText: "Comprar"
     },
     {
       image: mdmaroxo,
-      name: "Esctasy Roxa",
-      description: "70MG MDMA",
-      price: "R$ 179,90",
+      name: "🌊 Ultra Blue",
+      description: "Cafeína: 140mg | Sabor: Framboesa azul com toques cítricos.",
+      price: "R$ 34,90",
       buttonColor: "purple",
       buttonText: "Comprar"
     },
     {
       image: mdmadiabo,
-      name: "Esctasy do Diabinho",
-      description: "130MG MDMA - Sabor Framboesa",
-      price: "R$ 189,90",
+      name: "🌸 Ultra Rosá",
+      description: "Cafeína: 150mg | Sabor: Frutos vermelhos com notas florais / limonada rosa.",
+      price: "R$ 34,90",
       buttonColor: "pink",
       buttonText: "Comprar"
     },
     {
       image: mdmaverde,
-      name: "Esctasy Verde",
-      description: "60MG MDMA",
-      price: "R$ 169,90",
+      name: "🌴 Ultra Paradise",
+      description: "Cafeína: 140mg | Sabor: Kiwi, lima e toque de pepino — sabor tropical.",
+      price: "R$ 34,90",
       buttonColor: "green",
       buttonText: "Comprar"
     },
     {
       image: mdmapeach,
-      name: "Esctasy Natural",
-      description: "130MG MDMA - Sabor Maçã",
-      price: "R$ 159,90",
-      buttonColor: "orange",
-      buttonText: "Comprar"
-    },
-    {
-      image: mdmaazul,
-      name: "Trevo de 4 folhas",
-      description: "130MG MDMA - Sabor Algodão doce",
-      price: "R$ 159,90",
+      name: "🌅 Ultra Sunrise",
+      description: "Cafeína: 155mg | Sabor: Laranja cítrica (tipo tangerina/toranja).",
+      price: "R$ 34,90",
       buttonColor: "orange",
       buttonText: "Comprar"
     }
@@ -243,7 +269,28 @@ function TelaInicial() {
   
   //cabecalho do Site
   return (
-    <div className="min-h-screen bg-black overflow-x-hidden">
+    <div className="min-h-screen bg-black overflow-x-hidden relative">
+      <AnimatePresence initial={false} custom={direction}>
+        <motion.img
+          key={currentSlide}
+          src={centralImages[currentSlide % centralImages.length]}
+          alt="Energético central"
+          className="pointer-events-none select-none absolute left-1/2 top-48 z-20"
+          style={{
+            transform: 'translateX(-60%)',
+            maxHeight: '60vh',
+            maxWidth: '30vw',
+            opacity: 1,
+            filter: 'drop-shadow(0 4px 32px #000a)'
+          }}
+          custom={direction}
+          variants={variants}
+          initial="enter"
+          animate="center"
+          exit="exit"
+          transition={{ type: 'tween', duration: 0.5 }}
+        />
+      </AnimatePresence>
 
       {/* Header/Navbar */}
       <header className="absolute top-0 left-0 right-0 z-50 slide-down-fade">
@@ -266,7 +313,7 @@ function TelaInicial() {
             {/* Logo Central */}
             <div className="flex-shrink-0 mb-4 md:mb-0">
               <Link to="/">
-                <img src={logo} alt="MyDrugs Logo" className="h-12 sm:h-16 md:h-20 lg:h-24 logo-header" />
+                <img src={logo} alt="Monster Logo" className="h-12 sm:h-16 md:h-20 lg:h-24 logo-header" />
               </Link>
             </div>
 
@@ -304,9 +351,7 @@ function TelaInicial() {
           Produtos em Destaque
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-6 md:gap-8 lg:gap-10">
-          {products
-            .filter(product => product.description.includes('MDMA'))
-            .map((product, index) => (
+          {products.map((product, index) => (
               <div 
                 key={index} 
                 className="relative group"
@@ -338,7 +383,7 @@ function TelaInicial() {
                   </div>
                 </div>
               </div>
-            ))}
+          ))}
         </div>
       </main>
 
@@ -347,8 +392,8 @@ function TelaInicial() {
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 lg:gap-8">
             <div>
-              <h3 className="text-base sm:text-lg md:text-xl font-bold mb-2 md:mb-4">MyDrugs</h3>
-              <p className="text-xs sm:text-sm md:text-base text-gray-400">Projeto desenvolvido com o objetivo de praticar minhas habilidades de programação. Ele foi inspirado na série "Como Vender Drogas Online (Rápido)" lançada em 2021 e exibida pela Netflix. Declaro que este projeto nunca teve como finalidade o tráfico ou comércio de entorpecentes. As fotos e imagens contidas neste site foram criadas e obtidas da internet.</p>
+              <h3 className="text-base sm:text-lg md:text-xl font-bold mb-2 md:mb-4">MyMonster</h3>
+              <p className="text-xs sm:text-sm md:text-base text-gray-400">Projeto desenvolvido com o objetivo de praticar minhas habilidades de programação. </p>
             </div>
             <div>
               <h4 className="text-sm sm:text-base md:text-lg font-semibold mb-2 md:mb-4">Links Úteis</h4>
@@ -356,7 +401,6 @@ function TelaInicial() {
               <li><a href="https://salesportifolio.netlify.app/" className="text-xs sm:text-sm md:text-base text-gray-400 hover:text-white">Portifolio</a></li>
               <li><a href="https://github.com/Usales" className="text-xs sm:text-sm md:text-base text-gray-400 hover:text-white">Github</a></li>
                 <li><a href="https://www.linkedin.com/in/gabriel-henriques-sales-43953b218/" className="text-xs sm:text-sm md:text-base text-gray-400 hover:text-white">Linkedin</a></li>
-                <li><a href="https://www.behance.net/gallery/133806169/How-To-Sell-Drugs-Online-(Netflix-Series)?tracking_source=search_projects|how+to+sell+drugs+online&l=17" className="text-xs sm:text-sm md:text-base text-gray-400 hover:text-white">Imagens | Produtos</a></li>
               </ul>
             </div>
             <div>
