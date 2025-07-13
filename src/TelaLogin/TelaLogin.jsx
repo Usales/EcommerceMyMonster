@@ -45,7 +45,7 @@ function TelaLogin() {
             {/* Logo Central */}
             <div className="flex-shrink-0 mb-4 md:mb-0">
               <Link to="/">
-                <img src={logo} alt="MyDrugs Logo" className="h-12 sm:h-16 md:h-20 lg:h-24 logo-header" />
+                <img src={logo} alt="MyMonster Logo" className="h-12 sm:h-16 md:h-20 lg:h-24 logo-header" />
               </Link>
             </div>
 
