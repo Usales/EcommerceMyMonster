@@ -88,23 +88,17 @@ const SlideItem = ({ image, title, description, buttonColor, buttonText, price, 
         onLoad={() => setImageLoaded(true)}
       />
       <div className={`absolute inset-0 bg-gradient-to-r from-${buttonColor}-600/30 to-${buttonColor}-800/30`}>
-      {/* Preço e Estrelas - Posicionado na lateral direita */}
-      <div className={`absolute ${buttonColor === 'red' || buttonColor === 'pink' || buttonColor === 'green' || buttonColor === 'purple' ? 'top-[calc(80%-5px+9px)]' : 'top-[calc(80%-5px)]'} sm:top-[60%] md:top-1/2 -translate-y-1/2 right-2 sm:right-4 md:right-8 lg:right-16 text-white flex flex-col items-end z-10`}>
-        <div className="flex flex-col items-end max-w-[200px] sm:max-w-[300px] md:max-w-[450px] lg:max-w-[620px]">
-          {/* Mobile: frase completa, Desktop: palavras empilhadas */}
-          <div className="hidden sm:flex flex-col items-end">
-            {bitcoinPrice.split(' ').map((word, index) => (
-              <span 
-                key={index}
-                className="text-lg sm:text-xl md:text-3xl lg:text-5xl xl:text-7xl font-bold uppercase block text-right leading-[1.1] sm:leading-tight"
-              >
-                {word}
-              </span>
-            ))}
-          </div>
-          <span className="sm:hidden text-lg font-bold uppercase text-right whitespace-nowrap">
-            {bitcoinPrice}
-          </span>
+      {/* Preço e Estrelas - Posicionado na lateral direita (apenas desktop) */}
+      <div className="hidden sm:flex absolute top-[60%] md:top-1/2 -translate-y-1/2 right-4 md:right-8 lg:right-16 text-white flex-col items-end z-10">
+        <div className="flex flex-col items-end max-w-[300px] md:max-w-[450px] lg:max-w-[620px]">
+          {bitcoinPrice.split(' ').map((word, index) => (
+            <span 
+              key={index}
+              className="text-lg sm:text-xl md:text-3xl lg:text-5xl xl:text-7xl font-bold uppercase block text-right leading-[1.1] sm:leading-tight"
+            >
+              {word}
+            </span>
+          ))}
         </div>
         {/* Removido bloco das estrelas */}
       </div>
@@ -133,11 +127,21 @@ const SlideItem = ({ image, title, description, buttonColor, buttonText, price, 
           >
             {description}
           </p>
-          <span 
-            className={`text-lg sm:text-xl md:text-2xl font-bold text-${buttonColor}-400 mb-2 sm:mb-3 md:mb-4 block`}
-          >
-            {price}
-          </span>
+          <div className="mb-2 sm:mb-3 md:mb-4">
+            {/* Mobile: texto lateral junto com preço */}
+            <div className="sm:hidden flex flex-col gap-1">
+              <span className={`text-lg font-bold text-${buttonColor}-400 block`}>
+                {price}
+              </span>
+              <span className="text-lg font-bold uppercase text-white">
+                {bitcoinPrice}
+              </span>
+            </div>
+            {/* Desktop: apenas preço */}
+            <span className={`hidden sm:block text-lg sm:text-xl md:text-2xl font-bold text-${buttonColor}-400`}>
+              {price}
+            </span>
+          </div>
           <button 
             className={`bg-${buttonColor}-500 text-white px-4 py-2 sm:px-5 sm:py-2.5 md:px-6 md:py-3 lg:px-8 lg:py-4 rounded-lg font-semibold text-sm sm:text-base md:text-lg hover:bg-${buttonColor}-400 transition-colors mt-3 sm:mt-4 md:mt-6 lg:mt-8 w-full sm:w-auto`}
             onClick={onButtonClick}
