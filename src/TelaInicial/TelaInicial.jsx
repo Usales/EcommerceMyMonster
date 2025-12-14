@@ -245,7 +245,7 @@ function TelaInicial() {
       title: "🌊 Ultra Blue",
       description: "Monster Ultra Blue é um energético da linha Zero Sugar da Monster, com sabor a framboesa azul gelada (e notas cítricas), leve, refrescante e sem açúcar. Ideal para quem procura energia intensa sem calorias.",
       buttonColor: "purple",
-      buttonText: "Experimentar",
+      buttonText: "Fica frio ai!",
       price: "R$ 34,90",
       bitcoinPrice: "Sinta a vibe gelada!"
     },
