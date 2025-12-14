@@ -218,7 +218,7 @@ function TelaInicial() {
       title: "🍋Ultra Citron",
       description: "Monster Ultra Citron é uma bebida energética sem açúcar, com baixo teor calórico, enfatizada por um sabor cítrico fresco e vibrante – uma abordagem única dentro da linha Monster Ultra, destacada pela sua lata amarela texturada.",
       buttonColor: "yellow",
-      buttonText: "Saiba Mais",
+      buttonText: "Ta sentindo a energia?",
       price: "R$ 34,90",
       bitcoinPrice: "Explosão de energia!"
     },
@@ -227,7 +227,7 @@ function TelaInicial() {
       title: "🔋 Monster Rehab",
       description: "Monster Rehab é uma bebida nutritiva e refrescante, concebida para quem procura hidratação e revitalização de forma suave, sem gás. Ideal para recuperar energias após o desporto, uma noite difícil ou simplesmente para um boost ao longo do dia.",
       buttonColor: "blue",
-      buttonText: "Explorar",
+      buttonText: "Olha o Gás!",
       price: "R$ 34,90",
       bitcoinPrice: "Recupere sua vibe!"
     },
@@ -263,7 +263,7 @@ function TelaInicial() {
       title: "🌴 Ultra Paradise",
       description: "Monster Ultra Paradise é um energético da linha Ultra Zero Sugar, com sabor a kiwi, lima e um toque sutil de pepino, evocando um verdadeiro ambiente paradisíaco. Tem zero açúcar e apenas 10 kcal por lata de 500 ml, sendo uma escolha energética sofisticada e tropical.",
       buttonColor: "green",
-      buttonText: "Explorar",
+      buttonText: "Relaxar",
       price: "R$ 34,90",
       bitcoinPrice: "Sabor do paraíso!"
     },
@@ -272,7 +272,7 @@ function TelaInicial() {
       title: "🌅 Ultra Sunrise",
       description: "Monster Ultra Sunrise pertence à série Ultra Zero Sugar da Monster, com sabor a laranja cítrica (próxima do tangerino ou sumar lemon), refrescante, leve e sem açúcar. Ideal para consumo a qualquer hora, especialmente de manhã — mantenha-se energizado com estilo e elegância.",
       buttonColor: "green",
-      buttonText: "Explorar",
+      buttonText: "Clima de praia",
       price: "R$ 34,90",
       bitcoinPrice: "Acorde com disposição!"
     }
