@@ -89,7 +89,7 @@ const SlideItem = ({ image, title, description, buttonColor, buttonText, price, 
       />
       <div className={`absolute inset-0 bg-gradient-to-r from-${buttonColor}-600/30 to-${buttonColor}-800/30`}>
       {/* Preço e Estrelas - Posicionado na lateral direita */}
-      <div className={`absolute ${buttonColor === 'red' || buttonColor === 'pink' || buttonColor === 'green' ? 'top-[calc(80%-5px+9px)]' : 'top-[calc(80%-5px)]'} sm:top-[60%] md:top-1/2 -translate-y-1/2 right-2 sm:right-4 md:right-8 lg:right-16 text-white flex flex-col items-end z-10`}>
+      <div className={`absolute ${buttonColor === 'red' || buttonColor === 'pink' || buttonColor === 'green' || buttonColor === 'purple' ? 'top-[calc(80%-5px+9px)]' : 'top-[calc(80%-5px)]'} sm:top-[60%] md:top-1/2 -translate-y-1/2 right-2 sm:right-4 md:right-8 lg:right-16 text-white flex flex-col items-end z-10`}>
         <div className="flex flex-col items-end max-w-[200px] sm:max-w-[300px] md:max-w-[450px] lg:max-w-[620px]">
           {/* Mobile: frase completa, Desktop: palavras empilhadas */}
           <div className="hidden sm:flex flex-col items-end">
