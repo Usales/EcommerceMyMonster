@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import logo from '../Imagens/mydrugslogo.png'
 import Slider from 'react-slick'
@@ -44,10 +44,50 @@ const centralImages = [
   kindpng7
 ]
 
-const SlideItem = ({ image, title, description, buttonColor, buttonText, price, bitcoinPrice, onButtonClick }) => (
-  <div className="relative h-screen">
-    <img src={image} alt={title} className="absolute inset-0 w-full h-full object-cover" />
-    <div className={`absolute inset-0 bg-gradient-to-r from-${buttonColor}-600/30 to-${buttonColor}-800/30`}>
+const SlideItem = ({ image, title, description, buttonColor, buttonText, price, bitcoinPrice, onButtonClick, isFirst = false, index = 0 }) => {
+  const [imageLoaded, setImageLoaded] = useState(false)
+  const imgRef = useRef(null)
+
+  useEffect(() => {
+    // Pré-carrega a imagem
+    const img = new Image()
+    img.src = image
+    img.onload = () => setImageLoaded(true)
+    
+    // Se a imagem já está em cache, marca como carregada imediatamente
+    if (img.complete) {
+      setImageLoaded(true)
+    }
+  }, [image])
+
+  return (
+    <div className="relative h-screen">
+      {/* Placeholder enquanto carrega */}
+      {!imageLoaded && (
+        <div 
+          className="absolute inset-0 w-full h-full bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 animate-pulse"
+          style={{ 
+            background: buttonColor === 'yellow' ? 'linear-gradient(135deg, #1a1a1a 0%, #2d2d1a 50%, #1a1a1a 100%)' :
+                      buttonColor === 'red' ? 'linear-gradient(135deg, #1a1a1a 0%, #2d1a1a 50%, #1a1a1a 100%)' :
+                      buttonColor === 'blue' ? 'linear-gradient(135deg, #1a1a1a 0%, #1a1a2d 50%, #1a1a1a 100%)' :
+                      buttonColor === 'purple' ? 'linear-gradient(135deg, #1a1a1a 0%, #2d1a2d 50%, #1a1a1a 100%)' :
+                      buttonColor === 'pink' ? 'linear-gradient(135deg, #1a1a1a 0%, #2d1a2d 50%, #1a1a1a 100%)' :
+                      buttonColor === 'green' ? 'linear-gradient(135deg, #1a1a1a 0%, #1a2d1a 50%, #1a1a1a 100%)' :
+                      'linear-gradient(135deg, #1a1a1a 0%, #2d2d1a 50%, #1a1a1a 100%)'
+          }}
+        />
+      )}
+      <img 
+        ref={imgRef}
+        src={image} 
+        alt={title} 
+        className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
+        loading={isFirst ? "eager" : "lazy"}
+        fetchPriority={isFirst ? "high" : "auto"}
+        decoding="async"
+        onLoad={() => setImageLoaded(true)}
+      />
+      <div className={`absolute inset-0 bg-gradient-to-r from-${buttonColor}-600/30 to-${buttonColor}-800/30`}>
       {/* Preço e Estrelas - Posicionado na lateral direita */}
       <div className="absolute top-[60%] sm:top-1/2 -translate-y-1/2 right-4 md:right-8 lg:right-16 text-white flex flex-col items-end z-10">
         <span 
@@ -97,7 +137,8 @@ const SlideItem = ({ image, title, description, buttonColor, buttonText, price, 
       </div>
     </div>
   </div>
-)
+  )
+}
 
 const variants = {
   enter: (direction) => ({
@@ -122,6 +163,24 @@ function TelaInicial() {
   const [currentSlide, setCurrentSlide] = useState(0)
   const [prevSlide, setPrevSlide] = useState(0)
   const [direction, setDirection] = useState(1)
+
+  // Pré-carrega as imagens do slider para melhor performance
+  useEffect(() => {
+    const preloadImages = [
+      yellowbackground,
+      darkpinkbackground,
+      redbackground,
+      purpebackground,
+      pinkbackground,
+      greenbackground,
+      peachbackground
+    ]
+    
+    preloadImages.forEach((imgSrc) => {
+      const img = new Image()
+      img.src = imgSrc
+    })
+  }, [])
   const sliderSettings = {
     dots: true,
     infinite: true,
@@ -338,7 +397,13 @@ function TelaInicial() {
       <div className="w-full h-[calc(100vh-4rem)] sm:h-screen">
         <Slider {...sliderSettings}>
           {slides.map((slide, index) => (
-            <SlideItem key={index} {...slide} onButtonClick={() => navigate('/shop')} />
+            <SlideItem 
+              key={index} 
+              {...slide} 
+              index={index}
+              isFirst={index === 0}
+              onButtonClick={() => navigate('/shop')} 
+            />
           ))}
         </Slider>
       </div>
