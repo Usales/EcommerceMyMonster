@@ -90,11 +90,16 @@ const SlideItem = ({ image, title, description, buttonColor, buttonText, price, 
       <div className={`absolute inset-0 bg-gradient-to-r from-${buttonColor}-600/30 to-${buttonColor}-800/30`}>
       {/* Preço e Estrelas - Posicionado na lateral direita */}
       <div className="absolute top-[60%] sm:top-1/2 -translate-y-1/2 right-4 md:right-8 lg:right-16 text-white flex flex-col items-end z-10">
-        <span 
-          className="text-2xl sm:text-3xl md:text-5xl lg:text-7xl font-bold uppercase mb-2 sm:mb-4 break-words max-w-[620px] text-right"
-        >
-          {bitcoinPrice}
-        </span>
+        <div className="flex flex-col items-end max-w-[620px]">
+          {bitcoinPrice.split(' ').map((word, index) => (
+            <span 
+              key={index}
+              className="text-2xl sm:text-3xl md:text-5xl lg:text-7xl font-bold uppercase block text-right leading-tight"
+            >
+              {word}
+            </span>
+          ))}
+        </div>
         {/* Removido bloco das estrelas */}
       </div>
       <style jsx>{`
