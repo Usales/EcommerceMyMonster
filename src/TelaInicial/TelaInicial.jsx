@@ -89,16 +89,22 @@ const SlideItem = ({ image, title, description, buttonColor, buttonText, price, 
       />
       <div className={`absolute inset-0 bg-gradient-to-r from-${buttonColor}-600/30 to-${buttonColor}-800/30`}>
       {/* Preço e Estrelas - Posicionado na lateral direita */}
-      <div className="absolute top-[60%] sm:top-1/2 -translate-y-1/2 right-4 md:right-8 lg:right-16 text-white flex flex-col items-end z-10">
-        <div className="flex flex-col items-end max-w-[620px]">
-          {bitcoinPrice.split(' ').map((word, index) => (
-            <span 
-              key={index}
-              className="text-2xl sm:text-3xl md:text-5xl lg:text-7xl font-bold uppercase block text-right leading-tight"
-            >
-              {word}
-            </span>
-          ))}
+      <div className={`absolute ${buttonColor === 'red' || buttonColor === 'pink' || buttonColor === 'green' ? 'top-[calc(80%-5px+9px)]' : 'top-[calc(80%-5px)]'} sm:top-[60%] md:top-1/2 -translate-y-1/2 right-2 sm:right-4 md:right-8 lg:right-16 text-white flex flex-col items-end z-10`}>
+        <div className="flex flex-col items-end max-w-[200px] sm:max-w-[300px] md:max-w-[450px] lg:max-w-[620px]">
+          {/* Mobile: frase completa, Desktop: palavras empilhadas */}
+          <div className="hidden sm:flex flex-col items-end">
+            {bitcoinPrice.split(' ').map((word, index) => (
+              <span 
+                key={index}
+                className="text-lg sm:text-xl md:text-3xl lg:text-5xl xl:text-7xl font-bold uppercase block text-right leading-[1.1] sm:leading-tight"
+              >
+                {word}
+              </span>
+            ))}
+          </div>
+          <span className="sm:hidden text-lg font-bold uppercase text-right whitespace-nowrap">
+            {bitcoinPrice}
+          </span>
         </div>
         {/* Removido bloco das estrelas */}
       </div>
@@ -115,25 +121,25 @@ const SlideItem = ({ image, title, description, buttonColor, buttonText, price, 
           }
         }
       `}</style>
-      <div className="h-full flex items-center px-4 md:px-8 lg:px-16">
-        <div className="text-white max-w-2xl">
+      <div className="h-full flex items-center px-3 sm:px-4 md:px-8 lg:px-16 pt-80 sm:pt-64 md:pt-0">
+        <div className="text-white max-w-full sm:max-w-xl md:max-w-2xl">
           <h2 
-            className="text-3xl md:text-4xl lg:text-5xl font-bold mb-2 md:mb-4"
+            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-2 sm:mb-3 md:mb-4 leading-tight"
           >
             {title}
           </h2>
           <p 
-            className="text-sm md:text-base lg:text-xl mb-4 md:mb-6 lg:mb-8"
+            className="text-xs sm:text-sm md:text-base lg:text-xl mb-3 sm:mb-4 md:mb-6 lg:mb-8 leading-relaxed sm:leading-normal"
           >
             {description}
           </p>
           <span 
-            className={`text-xl md:text-2xl font-bold text-${buttonColor}-400 mb-2 md:mb-4 block`}
+            className={`text-lg sm:text-xl md:text-2xl font-bold text-${buttonColor}-400 mb-2 sm:mb-3 md:mb-4 block`}
           >
             {price}
           </span>
           <button 
-            className={`bg-${buttonColor}-500 text-white px-4 py-2 md:px-6 md:py-3 lg:px-8 lg:py-4 rounded-lg font-semibold text-base md:text-lg hover:bg-${buttonColor}-400 transition-colors mt-4 md:mt-6 lg:mt-8`}
+            className={`bg-${buttonColor}-500 text-white px-4 py-2 sm:px-5 sm:py-2.5 md:px-6 md:py-3 lg:px-8 lg:py-4 rounded-lg font-semibold text-sm sm:text-base md:text-lg hover:bg-${buttonColor}-400 transition-colors mt-3 sm:mt-4 md:mt-6 lg:mt-8 w-full sm:w-auto`}
             onClick={onButtonClick}
           >
             {buttonText}
@@ -339,11 +345,9 @@ function TelaInicial() {
           key={currentSlide}
           src={centralImages[currentSlide % centralImages.length]}
           alt="Energético central"
-          className="pointer-events-none select-none absolute left-1/2 top-48 z-20"
+          className="pointer-events-none select-none absolute left-[calc(50%-30px)] sm:left-1/2 top-32 sm:top-40 md:top-48 z-20 max-h-[39.6vh] max-w-[59.4vw] sm:max-h-[35vh] sm:max-w-[40vw] md:max-h-[50vh] md:max-w-[35vw] lg:max-h-[60vh] lg:max-w-[30vw]"
           style={{
-            transform: 'translateX(-60%)',
-            maxHeight: '60vh',
-            maxWidth: '30vw',
+            transform: 'translateX(-50%)',
             opacity: 1,
             filter: 'drop-shadow(0 4px 32px #000a)'
           }}
@@ -358,15 +362,15 @@ function TelaInicial() {
 
       {/* Header/Navbar */}
       <header className="absolute top-0 left-0 right-0 z-50 slide-down-fade">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-col md:flex-row items-center justify-between py-4 md:py-6">
+        <div className="container mx-auto px-2 sm:px-4">
+          <div className="flex flex-col md:flex-row items-center justify-between py-2 sm:py-3 md:py-4 lg:py-6">
             {/* Links da Esquerda */}
-            <nav className="flex items-center gap-2 sm:gap-4 md:gap-6 lg:gap-10 mb-4 md:mb-0">
+            <nav className="flex items-center gap-1.5 sm:gap-2 md:gap-4 lg:gap-6 xl:gap-10 mb-2 sm:mb-3 md:mb-0">
               {["Home", "Shop", "FAQ"].map((item) => (
                 <div key={item}>
                   <Link
                     to={item === "Home" ? "/" : `/${item.toLowerCase()}`}
-                    className="transition-transform duration-300 hover:scale-105 text-white hover:text-gray-300 text-xs sm:text-sm md:text-base lg:text-lg font-bold border border-white px-2 sm:px-3 py-1"
+                    className="transition-transform duration-300 hover:scale-105 text-white hover:text-gray-300 text-[10px] xs:text-xs sm:text-sm md:text-base lg:text-lg font-bold border border-white px-1.5 sm:px-2 md:px-3 py-0.5 sm:py-1"
                   >
                     {item}
                   </Link>
@@ -375,19 +379,19 @@ function TelaInicial() {
             </nav>
 
             {/* Logo Central */}
-            <div className="flex-shrink-0 mb-4 md:mb-0">
+            <div className="flex-shrink-0 mb-2 sm:mb-3 md:mb-0">
               <Link to="/">
-                <img src={logo} alt="Monster Logo" className="h-12 sm:h-16 md:h-20 lg:h-24 logo-header" />
+                <img src={logo} alt="Monster Logo" className="h-10 sm:h-12 md:h-16 lg:h-20 xl:h-24 logo-header" />
               </Link>
             </div>
 
             {/* Links da Direita */}
-            <nav className="flex items-center gap-2 sm:gap-3 md:gap-4">
+            <nav className="flex items-center gap-1.5 sm:gap-2 md:gap-3 lg:gap-4">
               {["Seguranca", "Login", "Cadastrar"].map((item) => (
                 <div key={item}>
                   <Link
                     to={item === "Seguranca" ? "/seguranca" : `/${item.toLowerCase()}`}
-                    className="transition-transform duration-300 hover:scale-105 text-white hover:text-gray-300 text-xs sm:text-sm md:text-base lg:text-lg font-bold border border-white px-2 sm:px-3 py-1"
+                    className="transition-transform duration-300 hover:scale-105 text-white hover:text-gray-300 text-[10px] xs:text-xs sm:text-sm md:text-base lg:text-lg font-bold border border-white px-1.5 sm:px-2 md:px-3 py-0.5 sm:py-1"
                   >
                     {item}
                   </Link>
@@ -399,7 +403,7 @@ function TelaInicial() {
       </header>
 
       {/* Slider */}
-      <div className="w-full h-[calc(100vh-4rem)] sm:h-screen">
+      <div className="w-full h-[calc(100vh-3rem)] sm:h-[calc(100vh-4rem)] md:h-screen">
         <Slider {...sliderSettings}>
           {slides.map((slide, index) => (
             <SlideItem 
@@ -426,11 +430,11 @@ function TelaInicial() {
                 key={index} 
                 className="relative group"
               >
-                <div className="h-[250px] sm:h-[300px] md:h-[350px] lg:h-[400px] bg-gray-900 rounded-lg overflow-hidden">
+                <div className="h-[350px] sm:h-[300px] md:h-[350px] lg:h-[400px] bg-gray-900 rounded-lg overflow-hidden flex items-center justify-center">
                   <img 
                     src={product.image} 
                     alt={product.name} 
-                    className="w-full h-full object-cover"
+                    className="h-full w-auto object-contain sm:object-cover"
                   />
                   <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-70 transition-all duration-300 flex items-center justify-center">
                     <div className="text-white opacity-0 group-hover:opacity-100 transition-all duration-300 text-center p-2 sm:p-4">

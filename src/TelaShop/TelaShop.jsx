@@ -444,11 +444,11 @@ function TelaShop() {
               whileHover={{ scale: 1.02 }}
               className="bg-gray-800/50 backdrop-blur-md rounded-lg overflow-hidden border border-white"
             >
-              <div className="relative h-48 sm:h-56 md:h-64">
+              <div className="relative h-[350px] sm:h-56 md:h-64 flex items-center justify-center bg-gray-900 rounded-t-lg overflow-hidden">
                 <img
                   src={produto.imagem}
                   alt={produto.nome}
-                  className="w-full h-full object-cover"
+                  className="h-full w-auto object-contain sm:object-cover"
                 />
               </div>
               <div className="p-4 sm:p-6">
